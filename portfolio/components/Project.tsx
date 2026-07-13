@@ -4,7 +4,7 @@ import Link from "next/link"
 type ProjectProps = {
     title: string,
     imgSrc: string,
-    id: number
+    id: string
 }
 
 
@@ -12,7 +12,7 @@ export default function Project({title, imgSrc, id}:ProjectProps){
 
     return (
         <Link 
-            className="flex flex-col justify-center items-center text-center drop-shadow-xl gap-5" 
+            className="flex flex-col justify-center items-center text-center gap-5"
             href={`/projects/${id}`}
             prefetch
         >
@@ -30,7 +30,7 @@ export default function Project({title, imgSrc, id}:ProjectProps){
                 fill
                 alt=""
                 sizes="100%"
-                className="object-contain scale-90 hover:scale-95 transition-transform duration-400 drop-shadow-xl/50"
+                className="object-contain scale-90 hover:scale-95 transition-transform duration-400"
             />
             </div>
             <span className="text-xl">{title}</span>

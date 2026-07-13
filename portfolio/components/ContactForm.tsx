@@ -19,7 +19,7 @@ export default function ContactForm() {
           name="name"
           placeholder="Your Name"
           autoComplete="false"
-          className="w-full p-2 border rounded bg-(--accent-lightgreen) text-(--background) drop-shadow-sm/50"
+          className="w-full p-2 border rounded bg-(--accent-lightgreen) text-(--background)"
           required
         />
         <input
@@ -27,20 +27,20 @@ export default function ContactForm() {
           name="email"
           placeholder="Your Email"
           autoComplete="false"
-          className="w-full p-2 border rounded bg-(--accent-lightgreen) text-(--background) drop-shadow-sm/50"
+          className="w-full p-2 border rounded bg-(--accent-lightgreen) text-(--background)"
           required
         />
         <textarea
           name="message"
           autoComplete="false"
           placeholder="Message"
-          className="w-full p-2 border rounded h-32 bg-(--accent-lightgreen) text-(--background) drop-shadow-sm/50"
+          className="w-full p-2 border rounded h-32 bg-(--accent-lightgreen) text-(--background)"
           required
         />
 
         <button
           type="submit"
-          className="bg-(--background) text-white px-4 py-2 rounded hover:bg-(--accent-tangerine) drop-shadow-sm/50"
+          className="bg-(--background) text-(--foreground) px-4 py-2 rounded hover:bg-(--accent-tangerine) hover:text-(--background) transition"
         >
           Send
         </button>

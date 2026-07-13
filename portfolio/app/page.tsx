@@ -3,10 +3,11 @@ import Header from "@/components/Header";
 import LogoLoop from "@/components/LogoLoop";
 import Project from "@/components/Project";
 import TriangleMesh from "@/components/TriangleMesh";
+import ConvexIcon from "@/components/icons/ConvexIcon";
 import Link from "next/link";
 import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiHtml5, SiCss3, SiKotlin, SiCplusplus,
-  SiNodedotjs, SiMysql, SiClerk, SiFigma, SiGit, SiGithubcopilot, SiPostman, SiClaude,
+  SiNodedotjs, SiMysql, SiClerk, SiFigma, SiGit, SiGithubcopilot, SiPostman, SiClaude, SiVercel,
   SiLinkedin, SiGithub,
 } from "react-icons/si";
 
@@ -30,6 +31,7 @@ export default function Home() {
       { node: <SiNodedotjs color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Node.js", href: "https://nodejs.org" },
       // Databases
       { node: <SiMysql color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "MySQL", href: "https://www.mysql.com" },
+      { node: <ConvexIcon color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Convex", href: "https://convex.dev" },
       // Tools
       { node: <SiClerk color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Clerk", href: "https://clerk.com" },
       { node: <SiFigma color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Figma", href: "https://figma.com" },
@@ -37,6 +39,7 @@ export default function Home() {
       { node: <SiGithubcopilot color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "GitHub Copilot", href: "https://github.com/features/copilot" },
       { node: <SiPostman color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Postman", href: "https://www.postman.com" },
       { node: <SiClaude color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Claude", href: "https://claude.com" },
+      { node: <SiVercel color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Vercel", href: "https://vercel.com" },
     ];
 
   return (
@@ -55,7 +58,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/cooper-jones-dev/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-(--accent-darkgreen) w-50 text-center p-3 flex flex-row justify-center items-center gap-5 text-xl hover:bg-(--accent-lightgreen) transition hover:text-(--accent-darkgreen) rounded-lg drop-shadow-sm/50"
+              className="bg-(--accent-darkgreen) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--accent-darkgreen) rounded-full"
               >
                   <SiLinkedin/>
                   LinkedIn
@@ -64,7 +67,7 @@ export default function Home() {
                 href="https://www.github.com/cooperjones13"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-(--accent-darkgreen) w-50 text-center p-3 flex flex-row justify-center items-center gap-5 text-xl hover:bg-(--accent-lightgreen) transition hover:text-(--accent-darkgreen) rounded-lg drop-shadow-sm/50"
+                className="bg-(--accent-darkgreen) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--accent-darkgreen) rounded-full"
                 >
                     <SiGithub/>
                     Github
@@ -85,16 +88,16 @@ export default function Home() {
           scaleOnHover={true}
           speed={80}
           fadeOut={true}
-          fadeOutColor="#3B5447"
+          fadeOutColor="var(--accent-darkgreen)"
         />
       </section>
       <section id="projects" className="flex flex-col min-h-100 w-full items-center justify-center text-center gap-10 bg-(--background) py-15 scroll-mt-20">
         <div className="flex flex-col text-left max-w-300 gap-10 mx-10">
           <h2 className="text-5xl serif">Projects</h2>
           <div className="flex flex-wrap justify-center gap-10">
-              <Project title="Mosh" imgSrc="/mosh-final-logo.png" id={1}/>
-              <Project title="Radii" imgSrc="/radii.png" id={2}/>
-              <Project title="PASTIME" imgSrc="/pastime.png" id={3}/>
+              <Project title="Mosh" imgSrc="/mosh-final-logo.png" id={"mosh"}/>
+              <Project title="Radii" imgSrc="/radii.png" id={"radii"}/>
+              <Project title="PASTIME" imgSrc="/pastime.png" id={"pastime"}/>
           </div>
         </div>
       </section> 
@@ -108,7 +111,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/cooper-jones-dev/"
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-(--background) w-50 text-center p-3 flex flex-row justify-center items-center gap-5 text-xl hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-lg drop-shadow-sm/50"
+              className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
               >
                   <SiLinkedin/>
                   LinkedIn
@@ -117,7 +120,7 @@ export default function Home() {
                 href="https://www.github.com/cooperjones13"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-(--background) w-50 text-center p-3 flex flex-row justify-center items-center gap-5 text-xl hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-lg drop-shadow-sm/50"
+                className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
                 >
                     <SiGithub/>
                     Github

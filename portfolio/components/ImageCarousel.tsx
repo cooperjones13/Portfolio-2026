@@ -1,18 +1,63 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { IoChevronBack, IoChevronForward } from "react-icons/io5"
 
 type ImageCarouselProps = {
     images: string[],
-    alt: string
+    alt: string,
+    autoRotateMs?: number
 }
 
-export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
-    const [index, setIndex] = useState(0)
+export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: ImageCarouselProps) {
+    const n = images.length
+    const slides = n > 1 ? [images[n - 1], ...images, images[0]] : images
 
-    if (images.length <= 1) {
+    const [current, setCurrent] = useState(1)
+    const [transitionEnabled, setTransitionEnabled] = useState(true)
+    const [isPaused, setIsPaused] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(false)
+
+    const activeIndex = ((current - 1) % n + n) % n
+
+    const goPrev = () => {
+        if (isAnimating) return
+        setIsAnimating(true)
+        setTransitionEnabled(true)
+        setCurrent((c) => c - 1)
+    }
+    const goNext = () => {
+        if (isAnimating) return
+        setIsAnimating(true)
+        setTransitionEnabled(true)
+        setCurrent((c) => c + 1)
+    }
+    const goTo = (i: number) => {
+        if (isAnimating || i === activeIndex) return
+        setIsAnimating(true)
+        setTransitionEnabled(true)
+        setCurrent(i + 1)
+    }
+
+    const handleTransitionEnd = () => {
+        if (current === 0) {
+            setTransitionEnabled(false)
+            setCurrent(n)
+        } else if (current === n + 1) {
+            setTransitionEnabled(false)
+            setCurrent(1)
+        }
+        setIsAnimating(false)
+    }
+
+    useEffect(() => {
+        if (n <= 1 || isPaused) return
+        const id = setInterval(goNext, autoRotateMs)
+        return () => clearInterval(id)
+    }, [n, isPaused, autoRotateMs, current])
+
+    if (n <= 1) {
         return (
             <div className="relative aspect-square w-full max-w-125 overflow-hidden rounded-lg bg-(--accent-darkgreen)">
                 <Image
@@ -21,24 +66,37 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                     alt={alt}
                     sizes="100%"
                     className="object-contain"
+                    priority
                 />
             </div>
         )
     }
 
-    const goPrev = () => setIndex((i) => (i - 1 + images.length) % images.length)
-    const goNext = () => setIndex((i) => (i + 1) % images.length)
-
     return (
-        <div className="flex flex-col gap-3 w-full max-w-125">
+        <div
+            className="flex flex-col gap-3 w-full max-w-125"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+        >
             <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-(--accent-darkgreen)">
-                <Image
-                    src={images[index]}
-                    fill
-                    alt={`${alt} ${index + 1} of ${images.length}`}
-                    sizes="100%"
-                    className="object-contain"
-                />
+                <div
+                    className={`flex h-full ${transitionEnabled ? "transition-transform duration-500 ease-in-out" : ""}`}
+                    style={{ width: `${slides.length * 100}%`, transform: `translateX(-${current * (100 / slides.length)}%)` }}
+                    onTransitionEnd={handleTransitionEnd}
+                >
+                    {slides.map((src, i) => (
+                        <div key={i} className="relative h-full shrink-0" style={{ width: `${100 / slides.length}%` }}>
+                            <Image
+                                src={src}
+                                fill
+                                alt={`${alt} ${((i - 1 + n) % n) + 1} of ${n}`}
+                                sizes="100%"
+                                className="object-contain"
+                                priority={i === 1}
+                            />
+                        </div>
+                    ))}
+                </div>
                 <button
                     type="button"
                     onClick={goPrev}
@@ -61,9 +119,9 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                     <button
                         key={i}
                         type="button"
-                        onClick={() => setIndex(i)}
+                        onClick={() => goTo(i)}
                         aria-label={`Go to image ${i + 1}`}
-                        className={`h-2 w-2 rounded-full transition-colors ${i === index ? "bg-(--accent-lightgreen)" : "bg-(--accent-darkgreen)"}`}
+                        className={`h-2 w-2 rounded-full transition-colors ${i === activeIndex ? "bg-(--accent-lightgreen)" : "bg-(--accent-darkgreen)"}`}
                     />
                 ))}
             </div>

@@ -5,7 +5,7 @@ type VimeoEmbedProps = {
 
 export default function VimeoEmbed({ videoId, title }: VimeoEmbedProps) {
     return (
-        <div className="relative w-125 max-w-[80vw] aspect-video overflow-hidden rounded-lg">
+        <div className="relative w-full aspect-video overflow-hidden rounded-lg">
             <iframe
                 src={`https://player.vimeo.com/video/${videoId}`}
                 title={title}
