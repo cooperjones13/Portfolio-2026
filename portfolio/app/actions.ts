@@ -10,7 +10,7 @@ export async function sendMessage(formData: FormData) {
   const message = formData.get("message") as string;
 
   if (!name || !email || !message) {
-    return { message: "All fields are required." };
+    return { success: false, message: "All fields are required." };
   }
 
   try {
@@ -25,9 +25,9 @@ Message: ${message}
 `.trim(),
     });
 
-    return { message: "Message sent successfully!" };
+    return { success: true, message: "Message sent successfully!" };
   } catch (error) {
     console.error(error);
-    return { message: "Something went wrong sending the message." };
+    return { success: false, message: "Something went wrong sending the message." };
   }
 }

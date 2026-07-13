@@ -62,6 +62,10 @@ export default function TriangleMesh() {
                     colorAccent = p.color(styles.getPropertyValue("--accent-tangerine").trim() || "#E29578")
 
                     buildGrid()
+
+                    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                        p.noLoop()
+                    }
                 }
 
                 p.draw = () => {
@@ -128,7 +132,7 @@ export default function TriangleMesh() {
         }
     }, [])
 
-    return <div ref={containerRef} className="absolute inset-0 overflow-hidden" />
+    return <div ref={containerRef} aria-hidden="true" className="absolute inset-0 overflow-hidden" />
 }
 
 function drawTriangle(

@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { IoChevronBack, IoChevronForward, IoClose, IoExpand } from "react-icons/io5"
+import { useReducedMotion } from "@/hooks/useReducedMotion"
 
 type ImageCarouselProps = {
     images: string[],
@@ -13,6 +14,7 @@ type ImageCarouselProps = {
 export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: ImageCarouselProps) {
     const n = images.length
     const slides = n > 1 ? [images[n - 1], ...images, images[0]] : images
+    const prefersReducedMotion = useReducedMotion()
 
     const [current, setCurrent] = useState(1)
     const [transitionEnabled, setTransitionEnabled] = useState(true)
@@ -22,20 +24,26 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
 
     const activeIndex = ((current - 1) % n + n) % n
 
-    const goPrev = () => {
+    const step = (delta: number) => {
         if (isAnimating) return
+        if (prefersReducedMotion) {
+            // No transition will fire, so jump straight to the wrapped slide
+            // instead of routing through the animated clone-slide dance.
+            setCurrent((c) => (((c - 1 + delta) % n + n) % n) + 1)
+            return
+        }
         setIsAnimating(true)
         setTransitionEnabled(true)
-        setCurrent((c) => c - 1)
+        setCurrent((c) => c + delta)
     }
-    const goNext = () => {
-        if (isAnimating) return
-        setIsAnimating(true)
-        setTransitionEnabled(true)
-        setCurrent((c) => c + 1)
-    }
+    const goPrev = () => step(-1)
+    const goNext = () => step(1)
     const goTo = (i: number) => {
         if (isAnimating || i === activeIndex) return
+        if (prefersReducedMotion) {
+            setCurrent(i + 1)
+            return
+        }
         setIsAnimating(true)
         setTransitionEnabled(true)
         setCurrent(i + 1)
@@ -53,10 +61,10 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
     }
 
     useEffect(() => {
-        if (n <= 1 || isPaused || isModalOpen) return
+        if (n <= 1 || isPaused || isModalOpen || prefersReducedMotion) return
         const id = setInterval(goNext, autoRotateMs)
         return () => clearInterval(id)
-    }, [n, isPaused, isModalOpen, autoRotateMs, current])
+    }, [n, isPaused, isModalOpen, prefersReducedMotion, autoRotateMs, current])
 
     useEffect(() => {
         if (!isModalOpen) return
@@ -73,6 +81,12 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
         }
     }, [isModalOpen, isAnimating])
 
+    // With reduced motion, jump straight to a non-animating transform whenever
+    // the animating flag is cleared without a transitionend event to catch it.
+    useEffect(() => {
+        if (prefersReducedMotion) setTransitionEnabled(false)
+    }, [prefersReducedMotion])
+
     if (n <= 1) {
         return (
             <>
@@ -80,7 +94,7 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
                     type="button"
                     onClick={() => setIsModalOpen(true)}
                     aria-label="Open larger image"
-                    className="group relative aspect-square w-full max-w-125 overflow-hidden rounded-lg bg-(--accent-darkgreen) cursor-zoom-in"
+                    className="group relative aspect-square w-full max-w-125 overflow-hidden rounded-lg bg-(--accent-darkgreen) cursor-zoom-in focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2"
                 >
                     <Image
                         src={images[0]}
@@ -116,7 +130,7 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
                     type="button"
                     onClick={() => setIsModalOpen(true)}
                     aria-label="Open larger image"
-                    className="group absolute inset-0 z-10 cursor-zoom-in"
+                    className="group absolute inset-0 z-10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:-outline-offset-2"
                 >
                     <span className="absolute bottom-2 right-2 flex items-center justify-center bg-(--background)/70 group-hover:bg-(--accent-lightgreen) group-hover:text-(--background) rounded-full p-2 transition-colors">
                         <IoExpand />
@@ -144,7 +158,7 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
                     type="button"
                     onClick={goPrev}
                     aria-label="Previous image"
-                    className="absolute z-10 left-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) rounded-full p-2 transition-colors"
+                    className="absolute z-10 left-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 rounded-full p-2 transition-colors"
                 >
                     <IoChevronBack />
                 </button>
@@ -152,7 +166,7 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
                     type="button"
                     onClick={goNext}
                     aria-label="Next image"
-                    className="absolute z-10 right-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) rounded-full p-2 transition-colors"
+                    className="absolute z-10 right-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 rounded-full p-2 transition-colors"
                 >
                     <IoChevronForward />
                 </button>
@@ -164,7 +178,8 @@ export default function ImageCarousel({ images, alt, autoRotateMs = 4000 }: Imag
                         type="button"
                         onClick={() => goTo(i)}
                         aria-label={`Go to image ${i + 1}`}
-                        className={`h-2 w-2 rounded-full transition-colors ${i === activeIndex ? "bg-(--accent-lightgreen)" : "bg-(--accent-darkgreen)"}`}
+                        aria-current={i === activeIndex}
+                        className={`h-2 w-2 rounded-full focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition-colors ${i === activeIndex ? "bg-(--accent-lightgreen)" : "bg-(--accent-darkgreen)"}`}
                     />
                 ))}
             </div>
@@ -190,16 +205,52 @@ type ImageModalProps = {
 }
 
 function ImageModal({ src, alt, onClose, onPrev, onNext }: ImageModalProps) {
+    const dialogRef = useRef<HTMLDivElement>(null)
+    const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+    useEffect(() => {
+        const previouslyFocused = document.activeElement as HTMLElement | null
+        closeButtonRef.current?.focus()
+        return () => {
+            previouslyFocused?.focus()
+        }
+    }, [])
+
+    useEffect(() => {
+        const handleTabTrap = (e: KeyboardEvent) => {
+            if (e.key !== "Tab") return
+            const focusables = dialogRef.current?.querySelectorAll<HTMLElement>('button')
+            if (!focusables || focusables.length === 0) return
+            const list = Array.from(focusables)
+            const first = list[0]
+            const last = list[list.length - 1]
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault()
+                last.focus()
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault()
+                first.focus()
+            }
+        }
+        document.addEventListener("keydown", handleTabTrap)
+        return () => document.removeEventListener("keydown", handleTabTrap)
+    }, [])
+
     return (
         <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={alt}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
             onClick={onClose}
         >
             <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
                 aria-label="Close larger image"
-                className="absolute top-4 right-4 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) rounded-full p-2 transition-colors"
+                className="absolute top-4 right-4 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 rounded-full p-2 transition-colors"
             >
                 <IoClose size={24} />
             </button>
@@ -208,7 +259,7 @@ function ImageModal({ src, alt, onClose, onPrev, onNext }: ImageModalProps) {
                     type="button"
                     onClick={(e) => { e.stopPropagation(); onPrev() }}
                     aria-label="Previous image"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) rounded-full p-3 transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 rounded-full p-3 transition-colors"
                 >
                     <IoChevronBack size={20} />
                 </button>
@@ -218,7 +269,7 @@ function ImageModal({ src, alt, onClose, onPrev, onNext }: ImageModalProps) {
                     type="button"
                     onClick={(e) => { e.stopPropagation(); onNext() }}
                     aria-label="Next image"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) rounded-full p-3 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-(--background)/70 hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 rounded-full p-3 transition-colors"
                 >
                     <IoChevronForward size={20} />
                 </button>

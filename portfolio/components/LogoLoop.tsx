@@ -293,7 +293,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     }, [effectiveHoverSpeed]);
 
     const renderLogoItem = useCallback(
-      (item: LogoItem, key: React.Key) => {
+      (item: LogoItem, key: React.Key, isHidden: boolean) => {
         if (renderItem) {
           return (
             <li className="logoloop__item" key={key} role="listitem">
@@ -330,6 +330,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             aria-label={itemAriaLabel || 'logo link'}
             target="_blank"
             rel="noreferrer noopener"
+            tabIndex={isHidden ? -1 : undefined}
           >
             {content}
           </a>
@@ -355,7 +356,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             aria-hidden={copyIndex > 0}
             ref={copyIndex === 0 ? seqRef : undefined}
           >
-            {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
+            {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`, copyIndex > 0))}
           </ul>
         )),
       [copyCount, logos, renderLogoItem]

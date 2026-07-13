@@ -205,6 +205,7 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
     return(
         <div className="min-h-screen">
             <Header/>
+            <main id="main-content">
             <section className="flex flex-col justify-center items-center gap-10 px-10 py-10">
                 <div className="flex flex-col lg:flex-row w-full max-w-400 gap-10 justify-center items-center lg:items-start">
                     <div className="flex flex-col gap-5 max-w-150 min-w-0 order-2 lg:order-1">
@@ -243,6 +244,7 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
                 </div>
 
             </section>
+            </main>
         </div>
     )
 }

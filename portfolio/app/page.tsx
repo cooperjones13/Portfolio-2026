@@ -46,11 +46,12 @@ export default function Home() {
   return (
     <div>
       <Header/>
+      <main id="main-content">
       <section className="relative flex flex-col min-h-[calc(100vh-5rem)] w-full items-center justify-center text-center gap-7 overflow-hidden">
         <TriangleMesh/>
-        <h2 className="relative z-10 text-8xl text-(--foreground) serif">
+        <h1 className="relative z-10 text-8xl text-(--foreground) serif">
           Cooper Jones
-        </h2>
+        </h1>
         <p className="relative z-10 text-4xl">
           Front End Web Developer
         </p>
@@ -156,6 +157,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </main>
     </div>
   );
 }
