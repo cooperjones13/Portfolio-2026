@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { IoGlobeOutline, IoNewspaperOutline, IoOpenOutline } from "react-icons/io5";
-import { SiAdobecreativecloud, SiArduino, SiClerk, SiExpress, SiFigma, SiGithub, SiNextdotjs, SiReact, SiTypescript, SiWordpress } from "react-icons/si";
+import { SiAdobecreativecloud, SiArduino, SiClerk, SiExpress, SiFigma, SiGithub, SiNextdotjs, SiNodedotjs, SiReact, SiTypescript, SiWordpress } from "react-icons/si";
 import { DatabaseZap } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 import VimeoEmbed from "@/components/VimeoEmbed";
@@ -80,6 +80,10 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
                     name: "Adobe CC",
                     icon: <SiAdobecreativecloud />
                 },
+                {
+                    name: "Node.js",
+                    icon: <SiNodedotjs />
+                },
             ],
             links:[
                 {
@@ -141,9 +145,9 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
                     <div className="flex flex-col gap-5 max-w-150 min-w-0 order-2 lg:order-1">
                         <h1 className="text-3xl font-bold serif tracking-wider">{data.title}</h1>
                         <strong>{data.subtitle}</strong>
-                        <ul className="flex flex-row gap-5 flex-wrap">
+                        <ul className="flex flex-row gap-3 flex-wrap">
                             {data.tags.map((tag, index)=>
-                                <li key={index} className="flex flex-row justify-center items-center gap-2 bg-(--accent-darkgreen) p-2 rounded-md">
+                                <li key={index} className="flex flex-row justify-center items-center gap-2 border border-(--accent-lightgreen)/40 text-(--accent-lightgreen) text-sm px-3 py-1 rounded-full">
                                     {tag.icon} {tag.name}
                                 </li>
                             )}
