@@ -78,7 +78,7 @@ export default function Home() {
         <div className="flex flex-col text-left max-w-300 gap-5 mx-10">
           <h2 className="text-5xl serif">About Me</h2>
           <p>
-            I’m a front-end-focused software engineer finishing my B.S. in Creative Technology and Design at the University of Colorado Boulder, with production experience building in React, Next.js, and TypeScript across internships and a live capstone. As a Front End Developer Intern at Lingoport, I served as the team’s primary front-end engineer, building React components and coordinating with backend engineers on data flow and API design. I’m also leading backend development on Mosh, a mobile-first social app for concert-goers, where I architected the Next.js, Convex, and Clerk stack from the ground up. I enjoy owning features from design through deployment and collaborating closely with backend and product teams to build interfaces that are both intuitive and reliable.
+            I’m a front-end-focused software engineer with a B.S. in Creative Technology and Design from the University of Colorado Boulder, with production experience building in React, Next.js, and TypeScript across internships and a capstone project. As a Front End Developer Intern at Lingoport, I served as the team’s primary front-end engineer, building React components and coordinating with backend engineers on data flow and API design. I’m also leading backend development on Mosh, a mobile-first social app for concert-goers, where I architected the Next.js, Convex, and Clerk stack from the ground up. I enjoy owning features from design through deployment and collaborating closely with backend and product teams to build interfaces that are both intuitive and reliable.
           </p>
         </div>
         <LogoLoop
@@ -94,10 +94,35 @@ export default function Home() {
       <section id="projects" className="flex flex-col min-h-100 w-full items-center justify-center text-center gap-10 bg-(--background) py-15 scroll-mt-20">
         <div className="flex flex-col text-left max-w-300 gap-10 mx-10">
           <h2 className="text-5xl serif">Projects</h2>
-          <div className="flex flex-wrap justify-center gap-10">
-              <Project title="Mosh" imgSrc="/mosh-final-logo.png" id={"mosh"}/>
-              <Project title="Radii" imgSrc="/radii.png" id={"radii"}/>
-              <Project title="PASTIME" imgSrc="/pastime.png" id={"pastime"}/>
+          <div className="flex flex-col gap-8">
+              <Project
+                title="Tacked"
+                imgSrc="/tacked-logo.png"
+                id={"tacked"}
+                description="A job search tracker with a Kanban board and Claude-powered resume scoring, tailored cover letters, and interview prep."
+                tags={["React", "TypeScript", "Vite", "Convex", "Clerk", "Claude"]}
+              />
+              <Project
+                title="Mosh"
+                imgSrc="/mosh-final-logo.png"
+                id={"mosh"}
+                description="A mobile-first social app for concert-goers to build groups, connect, and find their crew before a show."
+                tags={["React", "TypeScript", "Next.js", "Clerk", "Convex"]}
+              />
+              <Project
+                title="Radii"
+                imgSrc="/radii.png"
+                id={"radii"}
+                description="A concept music-sharing app with a live listening feature, built through user research and a high-fidelity Figma prototype."
+                tags={["Figma", "Adobe CC", "Node.js"]}
+              />
+              <Project
+                title="PASTIME"
+                imgSrc="/pastime.png"
+                id={"pastime"}
+                description="A physical-digital interface for exploring MLB stats, combining an RFID-scanned baseball with live API data."
+                tags={["React", "Arduino", "Express"]}
+              />
           </div>
         </div>
       </section> 

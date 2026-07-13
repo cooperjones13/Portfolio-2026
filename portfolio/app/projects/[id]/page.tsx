@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { IoGlobeOutline, IoNewspaperOutline, IoOpenOutline } from "react-icons/io5";
-import { SiAdobecreativecloud, SiArduino, SiClerk, SiExpress, SiFigma, SiGithub, SiNextdotjs, SiNodedotjs, SiReact, SiTypescript, SiWordpress } from "react-icons/si";
+import { SiAdobecreativecloud, SiArduino, SiClaude, SiClerk, SiExpress, SiFigma, SiGithub, SiNextdotjs, SiNodedotjs, SiReact, SiTypescript, SiVite, SiWordpress } from "react-icons/si";
 import ConvexIcon from "@/components/icons/ConvexIcon";
 import ImageCarousel from "@/components/ImageCarousel";
 import VimeoEmbed from "@/components/VimeoEmbed";
@@ -60,6 +60,63 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
                     name:"Github Repo",
                     icon: <SiGithub/>,
                     url: "https://github.com/cooperjones13/capstone"
+                }
+            ]
+        },
+        {
+            title: "Tacked",
+            subtitle: "Full Stack Job Search Platform",
+            id: "tacked",
+            images: [
+                "/tacked-renders/01-board-light.png",
+                "/tacked-renders/02-board-dark.png",
+                "/tacked-renders/03-detail-empty.png",
+                "/tacked-renders/04-detail-analyzed.png",
+                "/tacked-renders/05-cover-letter.png",
+                "/tacked-renders/06-interview-prep.png",
+                "/tacked-renders/07-analytics.png",
+                "/tacked-renders/08-resumes.png",
+                "/tacked-renders/09-mobile-board.png",
+            ],
+            imgAlt: "Screenshot of Tacked application",
+            videoId: undefined as string | undefined,
+            description: "Tacked is a full-stack job tracker I built to get rid of the spreadsheet everyone ends up using during a job search. It's a Kanban board - Interested, Applied, Interview, Offer, Rejected - but the part I actually care about is the AI underneath it. Upload a resume and paste in a job description, and it scores your fit for that specific role, breaks down where you're strong and where you're not, drafts a tailored cover letter, and builds out an interview prep sheet with behavioral, technical, role-specific, and culture questions.\n\nThe resume analysis sends the actual PDF straight to Claude as a native document input instead of extracting the text first, so formatting and layout aren't lost before the model ever sees them. I used Anthropic's tool-use API to force the response into a fixed schema rather than hoping a parser can make sense of freeform text. The cover letter generator was the harder problem: I wrote a 12-rule prompt aimed squarely at the tells that give AI-written cover letters away - no em dashes, no \"not only X but also Y,\" no stock openers, no clichés - so what comes out actually reads like someone wrote it.\n\nUnderneath all of that is Convex, which pushes every update to the board in real time and keeps each user's data isolated server-side through Clerk auth. Dragging a card between stages updates the UI immediately and reconciles with the server after the fact, and every move gets logged to a history table that feeds the analytics view - weekly application volume, plus a live funnel across the pipeline.",
+            tags: [
+                {
+                    name: "React",
+                    icon: <SiReact/>
+                },
+                {
+                    name: "Typescript",
+                    icon: <SiTypescript/>
+                },
+                {
+                    name: "Vite",
+                    icon: <SiVite/>
+                },
+                {
+                    name: "Convex",
+                    icon: <ConvexIcon size={16}/>
+                },
+                {
+                    name: "Clerk",
+                    icon: <SiClerk/>
+                },
+                {
+                    name: "Claude",
+                    icon: <SiClaude/>
+                }
+            ],
+            links:[
+                {
+                    name:"Live Site",
+                    icon: <IoGlobeOutline/>,
+                    url: "https://tacked.cooperjones.dev"
+                },
+                {
+                    name:"Github Repo",
+                    icon: <SiGithub/>,
+                    url: "https://github.com/cooperjones13/interview-helper"
                 }
             ]
         },
