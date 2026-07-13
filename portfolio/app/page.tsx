@@ -6,7 +6,7 @@ import TriangleMesh from "@/components/TriangleMesh";
 import ConvexIcon from "@/components/icons/ConvexIcon";
 import Link from "next/link";
 import {
-  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiHtml5, SiCss3, SiKotlin, SiCplusplus,
+  SiReact, SiNextdotjs, SiVite, SiTypescript, SiJavascript, SiPython, SiHtml5, SiCss3, SiKotlin, SiCplusplus,
   SiNodedotjs, SiMysql, SiClerk, SiFigma, SiGit, SiGithubcopilot, SiPostman, SiClaude, SiVercel,
   SiLinkedin, SiGithub,
 } from "react-icons/si";
@@ -28,6 +28,7 @@ export default function Home() {
       // Frameworks & Libraries
       { node: <SiReact color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "React", href: "https://react.dev" },
       { node: <SiNextdotjs color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Next.js", href: "https://nextjs.org" },
+      { node: <SiVite color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Vite", href: "https://vite.dev" },
       { node: <SiNodedotjs color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "Node.js", href: "https://nodejs.org" },
       // Databases
       { node: <SiMysql color={iconColor} tabIndex={-1} className="drop-shadow-md/10"/>, title: "MySQL", href: "https://www.mysql.com" },

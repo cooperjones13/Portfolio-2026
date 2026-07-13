@@ -15,6 +15,7 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
             subtitle: "Full Stack Web Application",
             id: "mosh",
             images: [
+                "/mosh-logo.png",
                 "/mosh-renders/home-render.png",
                 "/mosh-renders/event-page-render.png",
                 "/mosh-renders/messages-render.png",
@@ -65,9 +66,10 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
         },
         {
             title: "Tacked",
-            subtitle: "Full Stack Job Search Platform",
+            subtitle: "AI-Powered Job Search Tracker",
             id: "tacked",
             images: [
+                "/tacked-logo.png",
                 "/tacked-renders/01-board-light.png",
                 "/tacked-renders/02-board-dark.png",
                 "/tacked-renders/03-detail-empty.png",
