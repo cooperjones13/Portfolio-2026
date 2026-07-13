@@ -1,10 +1,12 @@
 import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import LogoLoop from "@/components/LogoLoop";
 import Project from "@/components/Project";
 import TriangleMesh from "@/components/TriangleMesh";
 import ConvexIcon from "@/components/icons/ConvexIcon";
 import Link from "next/link";
+import { IoMailOutline } from "react-icons/io5";
 import {
   SiReact, SiNextdotjs, SiVite, SiTypescript, SiJavascript, SiPython, SiHtml5, SiCss3, SiKotlin, SiCplusplus,
   SiNodedotjs, SiMysql, SiClerk, SiFigma, SiGit, SiGithubcopilot, SiPostman, SiClaude, SiVercel,
@@ -129,14 +131,17 @@ export default function Home() {
         </div>
       </section> 
       <section id="contact" className="flex flex-col min-h-100 w-full items-center justify-center text-center gap-10 bg-(--accent-darkgreen) py-15 scroll-mt-20">
-        <div className="flex flex-col text-left max-w-300 w-full gap-5 px-10">
-          <h2 className="text-4xl serif">Contact</h2>
-          <div className="flex md:justify-between justify-center w-full items-start flex-wrap gap-5">
+        <div className="flex flex-col text-left max-w-300 w-full gap-8 px-10">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-4xl serif">Contact</h2>
+            <p className="text-(--foreground)/80">Have a project in mind, or just want to say hi? Send me a message, or find me here.</p>
+          </div>
+          <div className="flex justify-start items-start flex-wrap gap-16">
             <ContactForm/>
-            <div className="flex flex-col gap-10 justify-around">
+            <div className="flex flex-col gap-6">
               <Link
               href="https://www.linkedin.com/in/cooper-jones-dev/"
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
               >
@@ -145,19 +150,26 @@ export default function Home() {
               </Link>
               <Link
                 href="https://www.github.com/cooperjones13"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
                 >
                     <SiGithub/>
                     Github
               </Link>
-            
+              <Link
+                href="mailto:cooper@arbdesk.net"
+                className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
+                >
+                    <IoMailOutline/>
+                    Email
+              </Link>
             </div>
           </div>
         </div>
       </section>
       </main>
+      <Footer/>
     </div>
   );
 }

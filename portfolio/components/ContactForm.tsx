@@ -50,7 +50,7 @@ export default function ContactForm() {
             name="message"
             autoComplete="off"
             placeholder="Message"
-            className="w-full p-2 border rounded h-32 bg-(--accent-lightgreen) text-(--background)"
+            className="w-full p-2 border rounded h-32 bg-(--accent-lightgreen) text-(--background) placeholder:text-(--background) placeholder:opacity-100"
             required
           />
         </div>

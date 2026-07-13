@@ -5,6 +5,7 @@ import ConvexIcon from "@/components/icons/ConvexIcon";
 import ImageCarousel from "@/components/ImageCarousel";
 import VimeoEmbed from "@/components/VimeoEmbed";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
 
@@ -245,6 +246,7 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
 
             </section>
             </main>
+            <Footer/>
         </div>
     )
 }
