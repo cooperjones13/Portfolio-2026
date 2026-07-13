@@ -132,7 +132,7 @@ export default function TriangleMesh() {
         }
     }, [])
 
-    return <div ref={containerRef} aria-hidden="true" className="absolute inset-0 overflow-hidden" />
+    return <div ref={containerRef} aria-hidden="true" className="absolute -top-24 inset-x-0 bottom-0 overflow-hidden" />
 }
 
 function drawTriangle(
