@@ -15,7 +15,7 @@ export default async function ProjectPage(props: PageProps<'/projects/[id]'>){
             subtitle: "Full Stack Web Application",
             id: "mosh",
             images: [
-                "/mosh-logo.png",
+                "/mosh-final-logo.png",
                 "/mosh-renders/home-render.png",
                 "/mosh-renders/event-page-render.png",
                 "/mosh-renders/messages-render.png",
