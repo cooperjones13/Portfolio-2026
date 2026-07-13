@@ -14,7 +14,7 @@ export default function Project({title, imgSrc, id, description, tags}:ProjectPr
 
     return (
         <Link
-            className="flex flex-row items-center gap-8 w-full text-left rounded-lg p-4 -m-4 hover:bg-(--accent-darkgreen)/20 focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition"
+            className="group flex flex-col sm:flex-row items-center sm:items-center gap-8 w-full text-left rounded-lg p-4 -m-4 hover:bg-(--accent-darkgreen)/20 focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition"
             href={`/projects/${id}`}
             prefetch
         >
@@ -36,7 +36,7 @@ export default function Project({title, imgSrc, id, description, tags}:ProjectPr
             />
             </div>
             <div className="flex flex-col gap-2 min-w-0">
-                <h3 className="text-xl serif">{title}</h3>
+                <h3 className="text-xl serif underline decoration-2 underline-offset-5 decoration-transparent group-hover:decoration-(--accent-tangerine) transition">{title}</h3>
                 <p className="text-sm text-(--foreground)/80">{description}</p>
                 <ul className="flex flex-row gap-2 flex-wrap">
                     {tags.map((tag) =>

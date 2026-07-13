@@ -96,7 +96,7 @@ export default function Home() {
       <section id="projects" className="flex flex-col min-h-100 w-full items-center justify-center text-center gap-10 bg-(--background) py-15 scroll-mt-20">
         <div className="flex flex-col text-left max-w-300 gap-10 mx-10">
           <h2 className="text-5xl serif">Projects</h2>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10">
               <Project
                 title="Tacked"
                 imgSrc="/tacked-logo.png"
