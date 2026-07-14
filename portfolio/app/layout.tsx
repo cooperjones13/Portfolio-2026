@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope, DM_Serif_Display} from "next/font/google";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const dmSerif = DM_Serif_Display({
   weight: "400",
@@ -39,6 +40,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${dmSerif.variable} antialiased`}
       >
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
