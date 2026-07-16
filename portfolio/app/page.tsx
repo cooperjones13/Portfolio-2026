@@ -1,4 +1,3 @@
-import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import LogoLoop from "@/components/LogoLoop";
@@ -131,40 +130,39 @@ export default function Home() {
         </div>
       </section> 
       <section id="contact" className="flex flex-col min-h-100 w-full items-center justify-center text-center gap-10 bg-(--accent-darkgreen) py-15 scroll-mt-20">
-        <div className="flex flex-col text-left max-w-300 w-full gap-8 px-10">
+        <div className="flex flex-col items-center max-w-300 w-full gap-10 px-10">
           <div className="flex flex-col gap-2">
             <h2 className="text-4xl serif">Contact</h2>
-            <p className="text-(--foreground)/80">Have a project in mind, or just want to say hi? Send me a message, or find me here.</p>
           </div>
-          <div className="flex justify-start items-start flex-wrap gap-16">
-            <ContactForm/>
-            <div className="flex flex-col gap-6">
-              <Link
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 w-full max-w-200">
+            <Link
+              href="mailto:cooper@arbdesk.net"
+              className="group flex flex-col items-center gap-3 bg-(--background) px-6 py-8 rounded-lg hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition"
+            >
+              <IoMailOutline size={32}/>
+              <span className="text-lg font-medium">Email</span>
+              <span className="text-sm text-(--foreground)/60 group-hover:text-(--background)/70 transition-colors">cooper@arbdesk.net</span>
+            </Link>
+            <Link
               href="https://www.linkedin.com/in/cooper-jones-dev/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
-              >
-                  <SiLinkedin/>
-                  LinkedIn
-              </Link>
-              <Link
-                href="https://www.github.com/cooperjones13"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
-                >
-                    <SiGithub/>
-                    Github
-              </Link>
-              <Link
-                href="mailto:cooper@arbdesk.net"
-                className="bg-(--background) w-fit px-6 py-2.5 flex flex-row justify-center items-center gap-3 text-lg hover:bg-(--accent-lightgreen) transition hover:text-(--background) rounded-full"
-                >
-                    <IoMailOutline/>
-                    Email
-              </Link>
-            </div>
+              className="group flex flex-col items-center gap-3 bg-(--background) px-6 py-8 rounded-lg hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition"
+            >
+              <SiLinkedin size={32}/>
+              <span className="text-lg font-medium">LinkedIn</span>
+              <span className="text-sm text-(--foreground)/60 group-hover:text-(--background)/70 transition-colors">Let&apos;s connect</span>
+            </Link>
+            <Link
+              href="https://www.github.com/cooperjones13"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-3 bg-(--background) px-6 py-8 rounded-lg hover:bg-(--accent-lightgreen) hover:text-(--background) focus-visible:outline-2 focus-visible:outline-(--accent-tangerine) focus-visible:outline-offset-2 transition"
+            >
+              <SiGithub size={32}/>
+              <span className="text-lg font-medium">GitHub</span>
+              <span className="text-sm text-(--foreground)/60 group-hover:text-(--background)/70 transition-colors">See my code</span>
+            </Link>
           </div>
         </div>
       </section>
