@@ -18,7 +18,7 @@ export default function Project({title, imgSrc, id, description, tags}:ProjectPr
             href={`/projects/${id}`}
             prefetch
         >
-            <div className="relative aspect-square w-40 sm:w-48 shrink-0 overflow-hidden rounded-lg">
+            <div className="relative w-full h-40 sm:h-auto sm:aspect-square sm:w-48 shrink-0 overflow-hidden rounded-lg">
                 <Image
                 src={imgSrc}
                 fill
